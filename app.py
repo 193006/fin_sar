@@ -245,14 +245,14 @@ if selected_option == "SAR-2023-24680":
     pdf_files = st.file_uploader("", type=["pdf"], accept_multiple_files=True)
 
     # Show uploaded files in a dropdown
-    if pdf_files:
-        st.subheader("Uploaded Files")
-        file_names = [file.name for file in pdf_files]
-        selected_file = st.selectbox("Select a file", file_names)
-        # Enabling the button
-        st.session_state.disabled = False
-        # Display selected PDF contents
-        with st.container():
+    with st.container():
+        if pdf_files:
+            st.subheader("Uploaded Files")
+            file_names = [file.name for file in pdf_files]
+            selected_file = st.selectbox("Select a file", file_names)
+            # Enabling the button
+            st.session_state.disabled = False
+            # Display selected PDF contents
             if selected_file:
                 selected_pdf = [pdf for pdf in pdf_files if pdf.name == selected_file][0]
                 pdf_images = render_pdf_as_images(selected_pdf)
