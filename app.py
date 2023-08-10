@@ -252,12 +252,13 @@ if selected_option == "SAR-2023-24680":
         # Enabling the button
         st.session_state.disabled = False
         # Display selected PDF contents
-        if selected_file:
-            selected_pdf = [pdf for pdf in pdf_files if pdf.name == selected_file][0]
-            pdf_images = render_pdf_as_images(selected_pdf)
-            st.subheader(f"Contents of {selected_file}")
-            for img_bytes in pdf_images:
-                st.image(img_bytes, use_column_width=True)
+        with st.container():
+            if selected_file:
+                selected_pdf = [pdf for pdf in pdf_files if pdf.name == selected_file][0]
+                pdf_images = render_pdf_as_images(selected_pdf)
+                st.subheader(f"Contents of {selected_file}")
+                for img_bytes in pdf_images:
+                    st.image(img_bytes, use_column_width=True)
 else:
     # Disabling the button
     st.session_state.disabled = True
